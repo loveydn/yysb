@@ -1,0 +1,160 @@
+<table style="width:100%;" cellpadding="0" cellspacing="0" align="center" border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.bg {
+				/* 歌词调整区 */
+				width: 100%;/* 歌词显示盒子宽 */
+				height: 100px;/* 歌词显示盒子高度，需要多显示几行歌词相应调大即可 */
+				/* background-color:#333; */ /* 歌词背景颜色 */
+				margin: 15px auto;
+				color: darkgrey;/* 歌词默认颜色,灰色 */
+				font-size: 12px;/* 歌词字体默认大小 */
+				overflow: hidden;
+				position: relative;
+				font-family: "微软雅黑";
+			}
+
+			.bg ul {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				list-style: none;
+			}
+
+			.bg ul li {
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+			}
+
+			.bg ul li.active {
+				/* 歌词高亮滚动区 */
+				color: black;/* 歌词滚动高亮颜色 */
+				/* font-weight: bold; *//* 文本加粗，不要，太丑了！ */
+				font-size: 15px; /* 歌词滚动行文字大小 */
+			}
+
+			audio {
+				/* 播放器调整区 */
+				width: 100%; /* 调整播放器宽度 */
+				/* 其他要修改播放器在这里修改 */
+
+			}
+		</style>
+	</head>
+
+	<body>
+		<center> <audio autoplay="autoplay" src="https://a-oss.zmki.cn/2019/ijqeaf0kniiaeoijadsolzmpel4179.mp3" controls></audio></center>
+		<div class="bg"></div>
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+ <script type="text/javascript">
+    $(function() {
+        function parseLyric(text) {
+            let lyricArr = text.split('\n');
+            let result = [];
+            for (i = 0; i < lyricArr.length; i++) {
+                let playTimeArr = lyricArr[i].match(/\[\d{2}:\d{2}((\.|\:)\d{2})\]/g); //正则匹配播放时间
+                let lineLyric = "";
+                if (lyricArr[i].split(playTimeArr).length > 0) {
+                    lineLyric = lyricArr[i].split(playTimeArr);
+                }
+
+                if (playTimeArr != null) {
+                    for (let j = 0; j < playTimeArr.length; j++) {
+                        let time = playTimeArr[j].substring(1, playTimeArr[j].indexOf("]")).split(":");
+                        //数组填充
+                        result.push({
+                            time: (parseInt(time[0]) * 60 + parseFloat(time[1])).toFixed(4),
+                            content: String(lineLyric).substr(1)
+                        });
+                    }
+                }
+
+
+            }
+            return result;
+        }
+
+// 这里请按照格式放入相应歌词--开始
+// 格式可能看着很复杂,其实是根据lrc歌词文件换句前加入\n 换行符,然后删除多余空行.即可!
+        let text = "[ar:梦涵][ti:17岁]\n[00:00.52]17岁 - 梦涵\n[00:01.13]作词：刘德华、徐继宗\n[00:02.30]作曲：徐继宗\n[00:17.71]十七岁那日不要脸\n[00:21.05]参加了挑战\n[00:23.73]明星也有训练班\n[00:26.52]短短一年太新鲜\n[00:29.31]记得四哥发哥都已见过面\n[00:35.81]后来\n[00:36.92]荣升主角太突然\n[00:41.89]廿九岁颁奖的晚宴\n[00:45.12]Fans太疯癫\n[00:47.75]来听我唱段情歌\n[00:50.43]一曲歌词太经典\n[00:53.37]我的震音假音\n[00:57.07]早已太熟练然而情歌\n[01:01.58]总唱不厌\n[01:05.38]喜欢我别遮脸\n[01:08.72]任由途人发现\n[01:11.25]尽管唱\n[01:12.72]用心把这情绪歌中染\n[01:19.56]唱情歌\n[01:22.54]齐齐来一遍无时无刻\n[01:27.05]都记住掌声响遍天\n[01:31.15]来唱情歌由从头再一遍\n[01:37.13]如情浓有点泪流\n[01:39.77]难避免音阶起跌拍子改变\n[01:46.60]每首歌\n[01:47.85]是每张脸\n[02:00.94]喜欢我\n[02:02.32]别遮脸\n[02:04.29]任由途人发现尽管唱\n[02:08.29]用心把这情绪歌声中渲染\n[02:13.61]唱情歌齐齐来一遍\n[02:19.74]无时无刻\n[02:21.05]都记住掌声响遍天\n[02:25.15]来唱情歌由从头再一遍\n[02:31.18]如情浓有点泪流\n[02:33.81]难避免音阶起跌拍子改变\n[02:40.70]年月变但我未变\n[02:44.12]唱情歌齐齐来一遍\n[02:49.64]无时无刻\n[02:51.11]都记住掌声响遍天\n[02:55.11]来唱情歌由从头再一遍\n[03:01.24]如情浓有点泪流\n[03:03.77]难避免音阶起跌拍子改变\n[03:10.83]每首歌是每张脸\n[03:20.86]如今我四十看从前\n[03:24.15]沙哑了声线\n[03:26.83]回忆我冀望那掌声\n[03:29.77]都依然到今天那首潮水\n[03:34.63]忘情水\n[03:36.10]不再经典仍长埋你的心中\n[03:42.94]从未变";
+// 这里请按照格式放入相应歌词--结束
+        let audio = document.querySelector('audio');
+
+        let result = parseLyric(text); //执行lyc解析
+        let $ul = $("<ul></ul>");
+        for (let i = 0; i < result.length; i++) {
+            let $li = $("<li></li>").text(result[i].content);
+            $ul.append($li);
+        }
+        $(".bg").append($ul);
+
+        let lineNo = 0; // 当前行歌词
+        let preLine =1; // 当播放6行后开始滚动歌词
+        let lineHeight = -30; // 每次滚动的距离
+
+        // 滚动播放 歌词高亮  增加类名active
+        function highLight() {
+            let $li = $("li");
+            $li.eq(lineNo).addClass("active").siblings().removeClass("active");
+            if (lineNo > preLine) {
+                $ul.stop(true, true).animate({ top: (lineNo - preLine) * lineHeight });
+            }
+        }
+
+        highLight();
+
+        // 播放的时候不断渲染
+        audio.addEventListener("timeupdate", function() {
+            if (lineNo == result.length) return;
+            if ($("li").eq(0).hasClass("active")) {
+                $("ul").css("top", "0");
+            }
+            lineNo =getLineNo(audio.currentTime);
+            highLight();
+            lineNo++;
+        });
+
+        // 当快进或者倒退的时候，找到最近的后面那个result[i].time
+        function getLineNo(currentTime) {
+            if (currentTime >= parseFloat(result[lineNo].time)) {
+                // 快进
+                for (let i = result.length - 1; i >= lineNo; i--) {
+                    if (currentTime >= parseFloat(result[i].time)) {
+                        return i;
+                    }
+                }
+            } else {
+                // 后退
+                for (let i = 0; i <= lineNo; i++) {
+                    if (currentTime <= parseFloat(result[i].time)) {
+                        return i - 1;
+                    }
+                }
+            }
+        }
+
+        //播放结束自动回到开头
+        audio.addEventListener("ended", function() {
+            lineNo = 0;
+            highLight();
+            audio.play();
+            $("ul").css("top", "0");
+        });
+    });
+    </script>
+</body>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br />
